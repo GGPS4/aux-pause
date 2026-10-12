@@ -12,7 +12,7 @@ The Pause button only turns on when all three are true:
 2. **Music is playing.** It can't start music, so nobody can use it to wake people up.
 3. **It's playing on the Echo Plus.** Music on my phone, car or computer can't be paused from here.
 
-The page shows a checklist of the three conditions so people can see why the button is grey. All three are checked again right before the pause is sent.
+The page only shows the button and a short line saying why it's grey when it can't be used. (A checklist of the three conditions is still in `index.html`, hidden; remove `hidden` from it to show it.) All three are checked again right before the pause is sent.
 
 ## Setup
 

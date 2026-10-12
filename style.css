@@ -1,0 +1,33 @@
+:root {
+  --bg: #0f1115; --card: #1a1d24; --text: #f2f3f5; --muted: #9aa0ab; --line: #2a2e37;
+  --red: #e5484d; --ok: #1ed760;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+.wrap { max-width: 440px; margin: 0 auto; padding: 32px 16px 80px; text-align: center; }
+h1 { margin: 0; font-size: 1.7rem; }
+.sub { color: var(--muted); margin: 8px 0 32px; }
+
+.big { width: 220px; height: 220px; max-width: 70vw; max-height: 70vw; border-radius: 50%; border: 0;
+  background: var(--red); color: #fff; font-family: inherit; font-size: 1.4rem; font-weight: 700; cursor: pointer;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 10px 40px rgba(229, 72, 77, .35); transition: transform .1s, background .2s, box-shadow .2s; }
+.big svg { width: 72px; height: 72px; fill: currentColor; }
+.big:active:not(:disabled) { transform: scale(.96); }
+.big:disabled { background: #2a2e37; color: #6b717c; box-shadow: none; cursor: not-allowed; }
+.big:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+.why { min-height: 1.5em; margin: 20px 0 24px; font-weight: 600; }
+.checks { list-style: none; padding: 14px 16px; margin: 0; text-align: left; background: var(--card);
+  border: 1px solid var(--line); border-radius: 14px; }
+.checks li { display: flex; align-items: center; gap: 10px; padding: 6px 0; color: var(--muted); }
+.checks .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); flex: none; }
+.checks li.yes { color: var(--text); }
+.checks li.yes .dot { background: var(--ok); }
+.checks li.no .dot { background: #6b717c; }
+
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(120px);
+  background: #fff; color: #111; padding: 10px 16px; border-radius: 999px; font-weight: 600;
+  transition: transform .25s; max-width: 90vw; }
+.toast.show { transform: translateX(-50%) translateY(0); }

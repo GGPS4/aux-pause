@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiet Button</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <meta name="theme-color" content="#0f1115">
+</head>
+<body>
+  <main class="wrap">
+    <h1>Too loud?</h1>
+    <p class="sub">If music is playing on the Echo late at night and nobody's home to turn it off, you can pause it here.</p>
+
+    <button id="pauseBtn" class="big" disabled aria-describedby="why">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+      <span>Pause</span>
+    </button>
+    <p id="why" class="why" aria-live="polite">Checking…</p>
+
+    <ul class="checks">
+      <li id="cTime"><span class="dot"></span><span class="lbl">Quiet hours</span></li>
+      <li id="cPlaying"><span class="dot"></span><span class="lbl">Music is playing</span></li>
+      <li id="cDevice"><span class="dot"></span><span class="lbl">Playing on the Echo</span></li>
+    </ul>
+
+    <div id="toast" class="toast"></div>
+  </main>
+  <script>
+    // Load settings, then the Spotify keys from the main aux site, then the app. Always fresh (GitHub Pages caches ~10 min).
+    (function () {
+      var v = Date.now();
+      function load(src, cb, onerr) {
+        var s = document.createElement("script");
+        s.src = src + (src.indexOf("?") < 0 ? "?" : "&") + "v=" + v;
+        s.onload = cb; s.onerror = onerr || cb;
+        document.body.appendChild(s);
+      }
+      load("config.js", function () {
+        var url = (window.PAUSE_CONFIG || {}).auxConfigUrl;
+        if (url) load(url, function () { load("app.js"); }); else load("app.js");
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,6 +1,12 @@
 (() => {
   const P = window.PAUSE_CONFIG || {};
   const A = window.AUX_CONFIG || {};                 // Spotify keys from the main aux-control site
+  if (A.keys) { // aux-control stores them scrambled; unscramble the same way it does
+    try {
+      const k = "aux-control", b = atob(A.keys.split("").reverse().join(""));
+      Object.assign(A, JSON.parse(decodeURIComponent(escape([...b].map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ k.charCodeAt(i % k.length))).join("")))));
+    } catch { /* fall through to "not set up" */ }
+  }
   const KEYS = { clientId: P.clientId || A.clientId, clientSecret: P.clientSecret || A.clientSecret, refreshToken: P.refreshToken || A.refreshToken };
   const SPEAKER = P.speakerName || A.speakerName || "Echo Plus";
   const TZ = P.timeZone || "America/New_York";
